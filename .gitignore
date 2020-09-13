@@ -1,0 +1,10 @@
+.idea/
+.idea/.gitignore
+.idea/django_delivery.iml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/sonarlint/
+.idea/vcs.xml
+django_delivery/__pychache__/
+venv/
