@@ -14,13 +14,11 @@ SECRET_KEY = '7s4__0nfoi@%j@=3^9$$59&usujl+j8424s5tqomny#=u0@4f1'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:4200"
-]
-CORS_ALLOW_HEADERS = [
-    'content-type'
-    'authorization'
-]
+CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_HEADERS = [
+#     'content-type'
+#     'authorization'
+# ]
 
 # Application definition
 
@@ -37,7 +35,6 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_filters',
     'corsheaders',
-
     # Apps
     'account',
     'client',
@@ -47,11 +44,12 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
