@@ -55,7 +55,7 @@ class Query(graphene.ObjectType):
 
     @login_required
     def resolve_users(self, info, *args, **kwargs):
-        return User.objects.all()
+        return User.objects.filter(is_shop=False, is_staff=False).exclude(id=info.context.user.id)
 
 
 class Mutation(object):

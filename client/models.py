@@ -15,7 +15,7 @@ class Client(TimeStampedModel):
         (CityOptions.amman, 'Amman'),
         (CityOptions.irbid, 'Irbid'),
     )
-    id = models.UUIDField(default=uuid.UUID, primary_key=True)
+    id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     users = models.ManyToManyField(User)
     shipments = models.ManyToManyField(Shipment, related_name="related_clients")
     name = models.TextField()
