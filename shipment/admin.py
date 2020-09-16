@@ -13,7 +13,7 @@ class PackageInline(admin.ModelAdmin):
         if request.user.is_superuser:
             return Package.objects.all()
         else:
-            return Package.objects.filter(client__exact=request.user.userprofile.client)
+            return Package.objects.filter(shipment__client=request.user.userprofile.client)
 
 
 @admin.register(Shipment)

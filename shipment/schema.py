@@ -61,8 +61,6 @@ class CreateShipment(graphene.Mutation):
 
     @login_required
     def mutate(self, info, client_id, pickup_user_id, package_id):
-        import pdb
-        pdb.set_trace()
         client = relay.Node.get_node_from_global_id(info, client_id, ClientNode)
         pickup_user = relay.Node.get_node_from_global_id(info, pickup_user_id, UserNode)
         drop_user = info.context.user
