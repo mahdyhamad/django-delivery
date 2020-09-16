@@ -36,7 +36,6 @@ class CreateUser(graphene.Mutation):
                 first_name=first_name,
                 last_name=last_name,
                 full_name=first_name + " " + last_name,
-                is_shop=is_shop
             )
             profile = UserProfile.objects.get_or_create(user=user, mobile_number=mobile_number)
             return CreateUser(user=user)
