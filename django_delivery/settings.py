@@ -29,13 +29,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # Libraries
     'graphene_django',
     'django_extensions',
     'django_filters',
     'corsheaders',
-    # Apps
     'account',
     'client',
     'shipment',
