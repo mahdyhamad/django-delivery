@@ -17,7 +17,7 @@ class Package(TimeStampedModel):
         (SizeChoices.medium, 'medium'),
         (SizeChoices.large, 'large')
     )
-    id = models.UUIDField(primary_key=True, unique=True, auto_created=True, default=uuid.UUID)
+    id = models.UUIDField(primary_key=True, unique=True, auto_created=True, default=uuid.uuid4)
     size = models.TextField(choices=SIZE_CHOICES)
     weight = models.FloatField(null=True, blank=True)
 
@@ -32,6 +32,7 @@ class ShipmentStatusChoices(object):
 class Shipment(TimeStampedModel):
     SHIPMENT_STATUS_CHOICES = (
         (ShipmentStatusChoices.draft, 'draft'),
+        (ShipmentStatusChoices.in_process, 'in process'),
         (ShipmentStatusChoices.dropped, 'dropped'),
         (ShipmentStatusChoices.picked_up, 'picked up'),
     )
@@ -58,5 +59,5 @@ class Shipment(TimeStampedModel):
         credentials = Credentials.create()
         return cls.objects.create(
             client=client, drop_off_user=drop_off_user, pickup_user=pickup_user, package=package, credentials=credentials,
-            statu=ShipmentStatusChoices.in_process, price=price)
+            status=ShipmentStatusChoices.in_process, price=price)
 

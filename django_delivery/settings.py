@@ -89,7 +89,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_delivery.wsgi.application'
 AUTH_USER_MODEL = 'account.User'
-
+AUTH_PROFILE_MODULE = "account.UserProfile"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 

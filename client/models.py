@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.db.models import Sum
 from model_utils.models import TimeStampedModel
 from account.models import User
 from shipment.models import Shipment
@@ -22,3 +23,14 @@ class Client(TimeStampedModel):
     city = models.TextField(choices=CITY_OPTIONS, null=True, blank=True)
     detailed_address = models.TextField(null=True, blank=True)
 
+    @property
+    def shipments_count(self):
+        return Shipment.objects.filter(client__exact=self).count()
+
+    @property
+    def total_money_earned(self):
+
+        return Shipment.objects.filter(client__exact=self).aggregate(Sum('price'))['price__sum']
+
+    def __str__(self):
+        return self.name

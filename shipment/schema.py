@@ -4,6 +4,8 @@ from graphene_django import DjangoObjectType, DjangoConnectionField
 from graphene_django.filter import DjangoFilterConnectionField
 from graphql_jwt.decorators import login_required
 
+from account.schema import UserNode
+from client.schema import ClientNode
 from credentials.models import Credentials
 from shipment.models import Shipment, Package
 
@@ -36,16 +38,17 @@ class Query(graphene.ObjectType):
 
 
 class CreatePackage(graphene.Mutation):
-    id = graphene.ID()
+    package = graphene.Field(PackageNode)
 
     class Arguments:
         size = graphene.String(required=True)
         weight = graphene.Decimal(required=True)
 
     @login_required
-    def mutate(self, size, weight, *args, **kwargs):
+    def mutate(self, info, size, weight):
+
         package = Package.objects.create(size=size, weight=weight)
-        return CreatePackage(id=relay.Node.to_global_id(PackageNode, package.id))
+        return CreatePackage(package=package)
 
 
 class CreateShipment(graphene.Mutation):
@@ -58,8 +61,10 @@ class CreateShipment(graphene.Mutation):
 
     @login_required
     def mutate(self, info, client_id, pickup_user_id, package_id):
-        client = relay.Node.get_node_from_global_id(info, client_id, 'client.schema.ClientNode')
-        pickup_user = relay.Node.get_node_from_global_id(info, pickup_user_id, 'account.schema.UserNode')
+        import pdb
+        pdb.set_trace()
+        client = relay.Node.get_node_from_global_id(info, client_id, ClientNode)
+        pickup_user = relay.Node.get_node_from_global_id(info, pickup_user_id, UserNode)
         drop_user = info.context.user
         package = relay.Node.get_node_from_global_id(info, package_id, PackageNode)
 
