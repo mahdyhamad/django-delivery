@@ -13,7 +13,7 @@ SECRET_KEY = '7s4__0nfoi@%j@=3^9$$59&usujl+j8424s5tqomny#=u0@4f1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOW_HEADERS = [
 #     'content-type'
@@ -99,7 +99,7 @@ DATABASES = {
         'NAME': 'delivery_db',
         'USER': 'root',
         'PASSWORD': 'QWEqwe!1',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '3306',
     }
 }
